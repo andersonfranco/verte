@@ -2147,7 +2147,9 @@ var script = {
     },
     handleFocus: function handleFocus (event) {
       var el = event.target;
-      el.select();
+      setTimeout(function () {
+        el.select();
+      }, 100);
     },
     handlePaste: function handlePaste (event) {
       event.preventDefault();

@@ -391,7 +391,9 @@ export default {
     },
     handleFocus (event) {
       const el = event.target;
-      el.select();
+      setTimeout(() => {
+        el.select();
+      }, 100);
     },
     handlePaste (event) {
       event.preventDefault();
