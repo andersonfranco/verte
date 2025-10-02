@@ -115,10 +115,14 @@
               :value="hex"
               type="text"
             )
-          button.verte__submit(@click="submit" type="button")
+          button.verte__submit(@click="submit" type="button" v-if="showSubmitButton")
             title Submit Icon
             svg.verte__icon(viewBox="0 0 24 24")
               path(d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z")
+          button.verte__submit(@click="pickColor" type="button" v-if="showEyeDropperButton")
+            title EyeDropper
+            svg.verte__icon(viewBox="0 0 24 24")
+              path(d="M19.35,11.72L17.22,13.85L15.81,12.43L8.1,20.14L3.5,22L2,20.5L3.86,15.9L11.57,8.19L10.15,6.78L12.28,4.65L19.35,11.72M16.76,3C17.93,1.83 19.83,1.83 21,3C22.17,4.17 22.17,6.07 21,7.24L19.08,9.16L14.84,4.92L16.76,3M5.56,17.03L4.5,19.5L6.97,18.44L14.4,11L13,9.6L5.56,17.03Z")
         .verte__recent(ref="recent" v-if="showHistory")
           a.verte__recent-color(
             role="button"
@@ -169,6 +173,14 @@ export default {
       validator: makeListValidator('menuPosition', ['top', 'bottom', 'left', 'right', 'center'])
     },
     showHistory: {
+      type: Boolean,
+      default: true
+    },
+    showSubmitButton: {
+      type: Boolean,
+      default: false
+    },
+    showEyeDropperButton: {
       type: Boolean,
       default: true
     },
@@ -281,6 +293,10 @@ export default {
 
     this.selectColor(this.value || '#000', true);
     this.currentModel = this.model;
+
+    if (!window.EyeDropper) {
+      this.showEyeDropperButton = false;
+    }
   },
   mounted () {
     // give sliders time to
@@ -342,6 +358,13 @@ export default {
       this.addColorToHistory(this.currentColor);
       this.$emit('input', this.currentColor);
       this.$emit('submit', this.currentColor);
+    },
+    pickColor () {
+      if (!window.EyeDropper) return;
+      const eyeDropper = new window.EyeDropper();
+      eyeDropper.open().then(({ sRGBHex }) => {
+        this.selectColor(sRGBHex);
+      });
     },
     addColorToHistory (color) {
       if (this.colorHistory) {
