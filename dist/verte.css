@@ -316,8 +316,8 @@
 }
 .verte__model:hover,
 .verte__submit:hover {
-  fill: #1a3aff;
-  color: #1a3aff;
+  fill: #000;
+  color: #000;
 }
 .verte__close {
   position: absolute;

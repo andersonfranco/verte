@@ -2597,7 +2597,7 @@
                           ? _c(
                               "button",
                               {
-                                staticClass: "verte__submit",
+                                staticClass: "verte__model",
                                 attrs: { type: "button" },
                                 on: { click: _vm.pickColor }
                               },
