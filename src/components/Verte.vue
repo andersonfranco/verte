@@ -109,7 +109,9 @@
             )
           template(v-if="currentModel === 'hex'")
             input.verte__input(
+              @focus="handleFocus"
               @change="inputChanged($event, 'hex')"
+              @paste="handlePaste($event)"
               :value="hex"
               type="text"
             )
@@ -291,6 +293,10 @@ export default {
   },
   methods: {
     selectColor (color, muted = false) {
+      if (this.currentModel === 'hex' && (color.length === 3 || color.length === 6)) {
+        color = '#' + color;
+      }
+
       if (!isValidColor(color)) return;
 
       this.rgb = toRgb(color);
@@ -359,6 +365,25 @@ export default {
       const normalized = Math.min(Math.max(el.value, el.min), el.max);
       this[this.currentModel][value] = normalized;
       this.selectColor(this[this.currentModel]);
+    },
+    handleFocus (event) {
+      const el = event.target;
+      el.select();
+    },
+    handlePaste (event) {
+      event.preventDefault();
+
+      if (this.currentModel !== 'hex') {
+        return;
+      }
+
+      let pasted = event.clipboardData.getData('text/plain') ||
+                      event.clipboardData.getData('text/html') ||
+                      event.clipboardData.getData('text');
+      
+      pasted = pasted.replace(/[\r\n]+/g, '').replace(/\s+/g, '').trim();
+
+      this.selectColor(pasted);
     },
     toggleMenu () {
       if (this.isMenuActive) {
