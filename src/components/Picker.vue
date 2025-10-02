@@ -274,45 +274,44 @@ export default {
 };
 </script>
 
-<style lang="sass">
-@import '../sass/variables';
-
-.verte-picker
-  width: 100%
-  margin: 0 auto 10px
-  display: flex
-  flex-direction: column
-
-  &--wheel
-    margin-top: 20px
-
-  &__origin
-    user-select: none
-    position: relative
-    margin: 0 auto
-    overflow: hidden
-  &__slider
-    margin: 20px 20px 0
-
-  &__canvas
-    display: block
-
-  &__cursor
-    position: absolute
-    top: 0
-    left: 0
-    margin: -6px
-    width: 12px
-    height: 12px
-    border: 1px solid $white
-    border-radius: 50%
-    will-change: transform
-    pointer-events: none
-    background-color: transparent
-    box-shadow: $white 0px 0px 0px 1.5px, rgba($black, 0.3) 0px 0px 1px 1px inset, rgba($black, 0.4) 0px 0px 1px 2px
-
-  &__input
-    display: flex
-    margin-bottom: $margin
-
+<style>
+.verte-picker {
+  width: 100%;
+  margin: 0 auto 10px;
+  display: flex;
+  flex-direction: column;
+}
+.verte-picker--wheel {
+  margin-top: 20px;
+}
+.verte-picker__origin {
+  user-select: none;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.verte-picker__slider {
+  margin: 20px 20px 0;
+}
+.verte-picker__canvas {
+  display: block;
+}
+.verte-picker__cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: -6px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  will-change: transform;
+  pointer-events: none;
+  background-color: transparent;
+  box-shadow: #fff 0px 0px 0px 1.5px, rgba(0, 0, 0, 0.3) 0px 0px 1px 1px inset, rgba(0, 0, 0, 0.4) 0px 0px 1px 2px;
+}
+.verte-picker__input {
+  display: flex;
+  margin-bottom: 10px;
+}
 </style>

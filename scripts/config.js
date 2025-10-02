@@ -1,13 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 const replace = require('rollup-plugin-replace');
-const vue = require('rollup-plugin-vue').default;
+const vue = require('rollup-plugin-vue');
 const resolve = require('rollup-plugin-node-resolve');
 const css = require('rollup-plugin-css-only');
 const buble = require('rollup-plugin-buble');
 const filesize = require('filesize');
 const gzipSize = require('gzip-size');
 const { uglify } = require('rollup-plugin-uglify');
+const commonjs = require('rollup-plugin-commonjs');
 
 const version = process.env.VERSION || require('../package.json').version;
 
@@ -50,7 +51,8 @@ function genConfig (options) {
       input: common.paths.input,
       plugins: [
         replace({ __VERSION__: version }),
-        css({ output: 'dist/verte.css' }),
+        css({ output: 'verte.css' }),
+        commonjs(),
         vue({ css: false }),
         resolve(),
         buble()

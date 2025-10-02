@@ -310,106 +310,107 @@ export default {
 };
 </script>
 
-<style lang="sass">
-@import '../sass/variables';
+<style>
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.slider:hover .slider-label, .slider--dragging .slider-label {
+  visibility: visible;
+  opacity: 1;
+}
 
-.slider
-  position: relative
-  display: flex
-  align-items: center
-  box-sizing: border-box
-  margin-bottom: $margin
-  font-size: 20px
-  &:hover,
-  &--dragging
-    .slider-label
-      visibility: visible
-      opacity: 1
+.slider__input {
+  margin-bottom: 0;
+  padding: 0.3em;
+  margin-left: 0.2em;
+  max-width: 70px;
+  width: 20%;
+  border: 0;
+  text-align: center;
+  font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+.slider__input::-webkit-inner-spin-button, .slider__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.slider__input:focus {
+  outline: none;
+  border-color: #1a3aff;
+}
 
+.slider__track {
+  position: relative;
+  flex: 1;
+  margin: 3px;
+  width: auto;
+  height: 8px;
+  background: #fff;
+  will-change: transfom;
+  background-image: linear-gradient(45deg, rgba(112, 128, 144, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(112, 128, 144, 0.5) 75%), linear-gradient(-45deg, rgba(112, 128, 144, 0.5) 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, rgba(112, 128, 144, 0.5) 75%);
+  background-size: 6px 6px;
+  background-position: 0 0, 3px -3px, 0 3px, -3px 0px;
+  border-radius: 10px;
+}
 
-.slider__input
-  margin-bottom: 0
-  padding: 0.3em
-  margin-left: 0.2em
-  max-width: 70px
-  width: 20%
-  border: 0
-  text-align: center
-  font-size: $fontTiny
-  -webkit-appearance: none
-  -moz-appearance: textfield
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button
-    -webkit-appearance: none
-    margin: 0
+.slider__handle {
+  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  color: #000;
+  margin: -2px 0 0 -8px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  background-color: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px -2px rgba(0, 0, 0, 0.1);
+}
 
-  &:focus
-    outline: none
-    border-color: $blue
+.slider__label {
+  position: absolute;
+  top: -3em;
+  left: 0.4em;
+  z-index: 999;
+  visibility: hidden;
+  padding: 6px;
+  min-width: 3em;
+  border-radius: 6px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1em;
+  opacity: 0;
+  transform: translate(-50%, 0);
+  white-space: nowrap;
+}
+.slider__label:before {
+  position: absolute;
+  bottom: -0.6em;
+  left: 50%;
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 0.6em 0.6em 0 0.6em;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+  content: "";
+  transform: translate3d(-50%, 0, 0);
+}
 
-.slider__track
-  position: relative
-  flex: 1
-  margin: 3px
-  width: auto
-  height: 8px
-  background: $white
-  will-change: transfom
-  background-image: $checkerboard
-  background-size: 6px 6px
-  background-position: 0 0, 3px -3px, 0 3px, -3px 0px
-  border-radius: 10px
-
-.slider__handle
-  position: relative
-  position: absolute
-  top: 0
-  left: 0
-  will-change: transform
-  color: $black
-  margin: -2px 0 0 -8px
-  width: 12px
-  height: 12px
-  border: 2px solid $white
-  background-color: currentColor
-  border-radius: 50%
-  box-shadow: 0 1px 4px -2px rgba($black, 10%)
-
-.slider__label
-  position: absolute
-  top: -3em
-  left: 0.4em
-  z-index: 999
-  visibility: hidden
-  padding: 6px
-  min-width: 3em
-  border-radius: $borderRadius
-  background-color: $black
-  color: $white
-  text-align: center
-  font-size: $fontTiny
-  line-height: 1em
-  opacity: 0
-  transform: translate(-50%, 0)
-  white-space: nowrap
-
-  &:before
-    position: absolute
-    bottom: -0.6em
-    left: 50%
-    display: block
-    width: 0
-    height: 0
-    border-width: 0.6em 0.6em 0 0.6em
-    border-style: solid
-    border-color: $black transparent transparent transparent
-    content: ''
-    transform: translate3d(-50%, 0, 0)
-
-.slider__fill
-  width: 100%
-  height: 100%
-  transform-origin: left top
-  border-radius: 10px
-
+.slider__fill {
+  width: 100%;
+  height: 100%;
+  transform-origin: left top;
+  border-radius: 10px;
+}
 </style>

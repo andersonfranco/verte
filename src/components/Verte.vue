@@ -388,189 +388,219 @@ export default {
 };
 </script>
 
-<style lang="sass">
-@import '../sass/variables';
+<style>
+.verte {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.verte * {
+  box-sizing: border-box;
+}
 
-$dot-size: 2px;
-$dot-space: 4px;
+.verte--loading {
+  opacity: 0;
+}
 
-.verte
-  position: relative
-  display: flex
-  justify-content: center
-  *
-    box-sizing: border-box
+.verte__guide {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.verte__guide:focus {
+  outline: 0;
+  cursor: pointer;
+}
+.verte__guide:hover {
+  cursor: pointer;
+}
+.verte__guide svg {
+  width: 100%;
+  height: 100%;
+  fill: inherit;
+}
 
-.verte--loading
-  opacity: 0
-.verte__guide
-  width: 24px
-  height: 24px
-  padding: 0
-  border: 0
-  background: transparent
+.verte__menu {
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  width: 250px;
+  border-radius: 6px;
+  background-color: #fff;
+  will-change: transform;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.verte__menu:focus {
+  outline: none;
+}
 
-  &:focus
-    outline: 0
-    cursor: pointer
+.verte__menu-origin {
+  display: none;
+  position: absolute;
+  z-index: 10;
+}
+.verte__menu-origin--active {
+  display: flex;
+}
+.verte__menu-origin--static {
+  position: static;
+  z-index: initial;
+}
+.verte__menu-origin--top {
+  bottom: 50px;
+}
+.verte__menu-origin--bottom {
+  top: 50px;
+}
+.verte__menu-origin--right {
+  right: 0;
+}
+.verte__menu-origin--left {
+  left: 0;
+}
+.verte__menu-origin--center {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.verte__menu-origin:focus {
+  outline: none;
+}
 
-  &:hover
-    cursor: pointer
+.verte__controller {
+  padding: 0 20px 20px;
+}
 
-  svg
-    width: 100%
-    height: 100%
-    fill: inherit
+.verte__recent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+.verte__recent-color {
+  margin: 4px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(45deg, rgba(112, 128, 144, 0.5) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(112, 128, 144, 0.5) 75%), linear-gradient(-45deg, rgba(112, 128, 144, 0.5) 25%, transparent 25%), linear-gradient(-45deg, transparent 75%, rgba(112, 128, 144, 0.5) 75%);
+  background-size: 6px 6px;
+  background-position: 0 0, 3px -3px, 0 3px, -3px 0px;
+  overflow: hidden;
+}
+.verte__recent-color:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+}
 
-.verte__menu
-  flex-direction: column
-  justify-content: center
-  align-items: stretch
-  width: 250px
-  border-radius: $borderRadius
-  background-color: $white
-  will-change: transform
-  box-shadow: 0 8px 15px rgba($black, 0.1)
-  &:focus
-    outline: none
+.verte__value {
+  padding: 0.6em;
+  width: 100%;
+  border: 1px solid #708090;
+  border-radius: 6px 0 0 6px;
+  text-align: center;
+  font-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+.verte__value:focus {
+  outline: none;
+  border-color: #1a3aff;
+}
 
-.verte__menu-origin
-  display: none
-  position: absolute
-  z-index: 10
-  &--active
-    display: flex
-  &--static
-    position: static
-    z-index: initial
-  &--top
-    bottom: 50px
-  &--bottom
-    top: 50px
-  &--right
-    right: 0
-  &--left
-    left: 0
-  &--center
-    position: fixed
-    top: 0
-    left: 0
-    width: 100vw
-    height: 100vh
-    justify-content: center
-    align-items: center
-    background-color: rgba($black, 0.1)
+.verte__icon {
+  width: 20px;
+  height: 20px;
+}
+.verte__icon--small {
+  width: 12px;
+  height: 12px;
+}
 
-  &:focus
-    outline: none
-.verte__controller
-  padding: 0 20px 20px
+.verte__input {
+  padding: 5px;
+  margin: 0 3px;
+  min-width: 0;
+  text-align: center;
+  border-width: 0 0 1px 0;
+}
+.verte__input::-webkit-inner-spin-button, .verte__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.verte__input {
+  appearance: none;
+  -moz-appearance: textfield;
+}
 
-.verte__recent
-  display: flex
-  flex-wrap: wrap
-  justify-content: flex-end
-  align-items: center
-  width: 100%
+.verte__inputs {
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
 
-  &-color
-    margin: 4px
-    width: 27px
-    height: 27px
-    border-radius: 50%
-    background-color: $white
-    box-shadow: 0 2px 4px rgba($black, 0.1)
-    background-image: $checkerboard
-    background-size: 6px 6px
-    background-position: 0 0, 3px -3px, 0 3px, -3px 0px
-    overflow: hidden
-    &:after
-      content: ''
-      display: block
-      width: 100%
-      height: 100%
-      background-color: currentColor
-
-.verte__value
-  padding: 0.6em
-  width: 100%
-  border: $border solid $gray
-  border-radius: $borderRadius 0 0 $borderRadius
-  text-align: center
-  font-size: $fontTiny
-  -webkit-appearance: none
-  -moz-appearance: textfield
-  &:focus
-    outline: none
-    border-color: $blue
-.verte__icon
-  width: 20px
-  height: 20px
-  &--small
-    width: 12px
-    height: 12px
-.verte__input
-  padding: 5px
-  margin: 0 3px
-  min-width: 0
-  text-align: center
-  border-width: 0 0 1px 0
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button
-    -webkit-appearance: none
-    margin: 0
-  appearance: none
-  -moz-appearance: textfield
-
-.verte__inputs
-  display: flex
-  font-size: 16px
-  margin-bottom: 5px
-.verte__draggable
-  border-radius: $borderRadius $borderRadius 0 0
-  height: 8px
-  width: 100%
-  cursor: grab
-  background: linear-gradient(90deg, $white ($dot-space - $dot-size), transparent 1%) center, linear-gradient($white ($dot-space - $dot-size), transparent 1%) center, rgba($gray, 0.2)
-  background-size: $dot-space $dot-space
+.verte__draggable {
+  border-radius: 6px 6px 0 0;
+  height: 8px;
+  width: 100%;
+  cursor: grab;
+  background: linear-gradient(90deg, #fff 2px, transparent 1%) center, linear-gradient(#fff 2px, transparent 1%) center, rgba(112, 128, 144, 0.2);
+  background-size: 4px 4px;
+}
 
 .verte__model,
-.verte__submit
-  position: relative
-  display: inline-flex
-  justify-content: center
-  align-items: center
-  padding: 1px
-  border: 0
-  text-align: center
-  cursor: pointer
-  background-color: transparent
-  font-weight: 700
-  color: $gray
-  fill: $gray
-  outline: none
-  &:hover
-    fill: $blue
-    color: $blue
+.verte__submit {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: 700;
+  color: #708090;
+  fill: #708090;
+  outline: none;
+}
+.verte__model:hover,
+.verte__submit:hover {
+  fill: #1a3aff;
+  color: #1a3aff;
+}
 
-.verte__close
-  position: absolute
-  top: 1px
-  right: 1px
-  z-index: 1
-  display: flex
-  justify-content: center
-  align-items: center
-  padding: 4px
-  cursor: pointer
-  border-radius: 50%
-  border: 0
-  transform: translate(50%, -50%)
-  background-color: rgba($black, 0.4)
-  fill: $white
-  outline: none
-  box-shadow: 1px 1px 1px rgba($black, 0.2)
-  &:hover
-    background-color: rgba($black, 0.6)
-
+.verte__close {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0;
+  transform: translate(50%, -50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  fill: #fff;
+  outline: none;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.verte__close:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
 </style>
