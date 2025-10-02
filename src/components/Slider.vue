@@ -306,7 +306,7 @@ export default {
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize);
-  },
+  }
 };
 </script>
 
