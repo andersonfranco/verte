@@ -2116,10 +2116,13 @@ var script = {
 
       if (!window.EyeDropper) { return; }
       var eyeDropper = new window.EyeDropper();
+      this.$emit('eyeDropperOpen');
       eyeDropper.open().then(function (ref) {
         var sRGBHex = ref.sRGBHex;
 
         this$1$1.selectColor(sRGBHex);
+      }).finally(function () {
+        this$1$1.$emit('eyeDropperClose');
       });
     },
     addColorToHistory: function addColorToHistory (color) {
@@ -2471,7 +2474,33 @@ var __vue_render__ = function() {
                           attrs: { type: "button" },
                           on: { click: _vm.switchModel }
                         },
-                        [_vm._v(_vm._s(_vm.currentModel))]
+                        [
+                          _vm._v(_vm._s(_vm.currentModel) + " "),
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "size-6",
+                              staticStyle: { width: "16px", height: "auto" },
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                fill: "none",
+                                viewBox: "0 0 24 24",
+                                "stroke-width": "1.5",
+                                stroke: "currentColor"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "stroke-linecap": "round",
+                                  "stroke-linejoin": "round",
+                                  d: "m19.5 8.25-7.5 7.5-7.5-7.5",
+                                  fill: "currentColor"
+                                }
+                              })
+                            ]
+                          )
+                        ]
                       ),
                       _vm.currentModel === "hsl"
                         ? [
@@ -2591,7 +2620,7 @@ var __vue_render__ = function() {
                         ? _c(
                             "button",
                             {
-                              staticClass: "verte__model",
+                              staticClass: "verte_eyedropper",
                               attrs: { type: "button" },
                               on: { click: _vm.pickColor }
                             },

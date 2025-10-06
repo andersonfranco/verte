@@ -299,6 +299,7 @@
   background-size: 4px 4px;
 }
 .verte__model,
+.verte_eyedropper,
 .verte__submit {
   position: relative;
   display: inline-flex;
@@ -315,6 +316,7 @@
   outline: none;
 }
 .verte__model:hover,
+.verte_eyedropper:hover,
 .verte__submit:hover {
   fill: #000;
   color: #000;

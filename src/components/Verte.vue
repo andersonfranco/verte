@@ -62,7 +62,7 @@
 
         //- verte inputs
         .verte__inputs
-          button.verte__model(@click="switchModel" type="button") {{currentModel}}
+          button.verte__model(@click="switchModel" type="button") {{currentModel}} <svg style="width: 16px;height: auto;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" fill="currentColor"></path></svg>
           template(v-if="currentModel === 'hsl'")
             input.verte__input(
               @change="inputChanged($event, 'hue')"
@@ -119,7 +119,7 @@
             title Submit Icon
             svg.verte__icon(viewBox="0 0 24 24")
               path(d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z")
-          button.verte__model(@click="pickColor" type="button" v-if="showEyeDropperButton")
+          button.verte_eyedropper(@click="pickColor" type="button" v-if="showEyeDropperButton")
             title EyeDropper
             svg.verte__icon(viewBox="0 0 24 24")
               path(d="M19.35,11.72L17.22,13.85L15.81,12.43L8.1,20.14L3.5,22L2,20.5L3.86,15.9L11.57,8.19L10.15,6.78L12.28,4.65L19.35,11.72M16.76,3C17.93,1.83 19.83,1.83 21,3C22.17,4.17 22.17,6.07 21,7.24L19.08,9.16L14.84,4.92L16.76,3M5.56,17.03L4.5,19.5L6.97,18.44L14.4,11L13,9.6L5.56,17.03Z")
@@ -362,8 +362,11 @@ export default {
     pickColor () {
       if (!window.EyeDropper) return;
       const eyeDropper = new window.EyeDropper();
+      this.$emit('eyeDropperOpen');
       eyeDropper.open().then(({ sRGBHex }) => {
         this.selectColor(sRGBHex);
+      }).finally(() => {
+        this.$emit('eyeDropperClose');
       });
     },
     addColorToHistory (color) {
@@ -611,6 +614,7 @@ export default {
 }
 
 .verte__model,
+.verte_eyedropper,
 .verte__submit {
   position: relative;
   display: inline-flex;
@@ -627,6 +631,7 @@ export default {
   outline: none;
 }
 .verte__model:hover,
+.verte_eyedropper:hover,
 .verte__submit:hover {
   fill: #000;
   color: #000;
